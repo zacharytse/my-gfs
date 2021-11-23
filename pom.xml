@@ -11,6 +11,8 @@
     <modules>
         <module>test-provider</module>
         <module>test-consumer</module>
+        <module>gfs-common</module>
+        <module>gfs-master</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -28,6 +30,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>1.5.9.RELEASE</version>
             <scope>test</scope>
+            <exclusions>
+                <!-- 切换log4j2日志读取 -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -59,6 +68,9 @@
             <version>5.0.3</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
     </dependencies>
 </project>
