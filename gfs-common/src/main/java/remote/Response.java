@@ -3,6 +3,7 @@ package remote;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
@@ -25,5 +26,6 @@ public class Response implements Serializable {
     /**
      * 消息体
      */
-    private Map<String, Object> map;
+    @Builder.Default
+    private Map<String, Object> map = new HashMap<>();
 }
