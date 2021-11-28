@@ -3,7 +3,9 @@ package remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class ChunkServerRpc extends UnicastRemoteObject implements IChunkRpc {
+import utils.Constant;
+
+public class ChunkServerRpc extends UnicastRemoteObject implements IChunkServerRpc {
 
     public ChunkServerRpc() throws RemoteException {
         super();
@@ -12,7 +14,8 @@ public class ChunkServerRpc extends UnicastRemoteObject implements IChunkRpc {
     @Override
     public Response heartBeat(Request request) throws RemoteException {
         Response response = Response.builder().build();
-        response.getMap().put("heartbeat", null);
+        response.getMap().put(Constant.HEART_BEAT, null);
+        System.out.println("收到master心跳信息...");
         return response;
     }
 

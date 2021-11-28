@@ -1,26 +1,17 @@
 package remote;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * 远程传输需要实现的接口
  */
-public interface IMasterRpc {
+public interface IMasterRpc extends Remote{
 
     /**
-     * 心跳
-     * @param serverName
+     * 将chunkServer注册到master节点上
+     * @param request
      * @return
      */
-    Response heartBeat(String serverName);
-
-    /**
-     * 发送命令
-     * @param serverName
-     * @return
-     */
-    Response sendCommand(String serverName,Request request);
-
-    /**
-     * 发送数据
-     */
-    Response sendData(String serverName,Request request);
+    Response registChunkServer(Request request) throws RemoteException;
 }

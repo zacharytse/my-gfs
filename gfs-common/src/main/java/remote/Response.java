@@ -1,10 +1,15 @@
 package remote;
 
-import lombok.*;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import utils.Constant;
 
 @Data
 @Builder
@@ -19,6 +24,8 @@ public class Response implements Serializable {
      */
     private String reqId;
     private Long reqSeq;
+    @Builder.Default
+    private Long code = Constant.SUCCESS;
     /**
      * 响应id
      */

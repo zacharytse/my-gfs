@@ -1,6 +1,7 @@
 package remote;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 import lombok.AllArgsConstructor;
@@ -25,8 +26,23 @@ public class Request implements Serializable {
      */
     private String reqId;
     private Long seq;
+
+    /**
+     * 需要调用的服务名称
+     */
+    private String className;
+    /**
+     * 指定需要调用方法的名称
+     */
+    private String methodName;
+
+    /**
+     * 执行方法所需的参数
+     */
+    private Object[] params;
     /**
      * 消息体
      */
-    Map<String,Object> map;
+    @Builder.Default
+    private Map<String, Object> body = new HashMap<String, Object>();
 }
