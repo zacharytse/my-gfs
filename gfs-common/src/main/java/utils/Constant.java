@@ -18,4 +18,14 @@ public class Constant {
     public static final Long FAIL = 500L;
 
     public static final String REGIST_CHUNK_SERVER = "registChunkServer";
+
+    public static final Integer MAX_CHUNK_SIZE = 64;
+
+    public static final String FILE_NAME = "file-name";
+
+    public static final String CHUNK_LIST = "chunk-list";
+
+    public static final String PREFIX = "/root/gfs-data";
+
+    public static final String FILE_INFO = "file-info";
 }

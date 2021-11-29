@@ -34,5 +34,5 @@ public class Response implements Serializable {
      * 消息体
      */
     @Builder.Default
-    private Map<String, Object> map = new HashMap<>();
+    private Map<String, Object> body = new HashMap<>();
 }

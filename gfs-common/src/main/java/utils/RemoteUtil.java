@@ -30,10 +30,6 @@ public class RemoteUtil {
 
     }
 
-    public static boolean registService(int port, Remote service) {
-        return registService(port, service,service.getClass().getName().toString());
-    }
-
     public static boolean registService(int port, Remote service, String key) {
         try {
             LocateRegistry.createRegistry(port);
@@ -45,6 +41,11 @@ public class RemoteUtil {
         }
         return false;
     }    
+
+    public static String generateKeyByIpAndPort(int port, String key) {
+        String ip = getIpAddress();
+        return ip + ":" + String.valueOf(port) + ":" + key;
+    }
 
     static void main(String[] args) {
         System.out.println(RemoteUtil.getIpAddress());

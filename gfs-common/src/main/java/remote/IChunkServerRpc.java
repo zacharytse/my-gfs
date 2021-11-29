@@ -10,4 +10,9 @@ public interface IChunkServerRpc extends Remote{
      * @return
      */
     Response heartBeat(Request request) throws RemoteException;
+     // 文件上传api
+     Response upload(Request request) throws RemoteException;
+
+     // 文件下载api
+     Response donwload(Request request) throws RemoteException;
 }

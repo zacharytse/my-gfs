@@ -1,9 +1,13 @@
 package dto;
 
-import lombok.*;
-
 import java.io.Serializable;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Builder
@@ -38,5 +42,10 @@ public class Chunk implements Serializable {
      * chunk的文件名
      */
     private String filename;
+
+    /**
+     * 文件的内容
+     */
+    private byte[] body;
 
 }

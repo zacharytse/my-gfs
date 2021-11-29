@@ -1,5 +1,0 @@
-digraph "com.xcq:gfs-chunk-server:jar:1.0-SNAPSHOT" { 
-	"com.xcq:gfs-chunk-server:jar:1.0-SNAPSHOT" -> "junit:junit:jar:4.11:test" ; 
-	"com.xcq:gfs-chunk-server:jar:1.0-SNAPSHOT" -> "org.projectlombok:lombok:jar:1.18.22:provided" ; 
-	"junit:junit:jar:4.11:test" -> "org.hamcrest:hamcrest-core:jar:1.3:test" ; 
- } 

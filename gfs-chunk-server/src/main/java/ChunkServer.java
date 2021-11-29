@@ -1,7 +1,7 @@
 import java.rmi.RemoteException;
 import java.util.Map;
 
-import remote.ChunkServerRpc;
+import remote.ChunkServerRpcImpl;
 import remote.IChunkServerRpc;
 import remote.IMasterRpc;
 import remote.IRpc;
@@ -15,11 +15,12 @@ public class ChunkServer {
     // 指定当前chunk server使用的端口号
     private int port = 9000;
     private IChunkServerRpc chunkServerRpc;
-    private String server = "localhost";
+    private String server = "127.0.1.1";
+    private int serverPort = 1099;
     private IRpc rpc;
 
     public ChunkServer() throws RemoteException {
-        chunkServerRpc = new ChunkServerRpc();
+        chunkServerRpc = new ChunkServerRpcImpl();
         registService();
         rpc = new RmiRpcImpl();
     }
@@ -54,7 +55,8 @@ public class ChunkServer {
         if (ip.length() == 0) {
             return false;
         }
-        Request request = Request.builder().className(IMasterRpc.class.getName())
+        Request request = Request.builder()
+                .className(server + ":" + String.valueOf(serverPort) + ":" + IMasterRpc.class.getName())
                 .methodName(Constant.REGIST_CHUNK_SERVER).build();
         request.setParams(new Object[] { request });
         Map<String, Object> body = request.getBody();
