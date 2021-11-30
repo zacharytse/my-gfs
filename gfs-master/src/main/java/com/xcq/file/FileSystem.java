@@ -3,9 +3,9 @@ package com.xcq.file;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import dto.ChunkInfo;
-import entity.NameNode;
-import utils.Constant;
+import com.xcq.dto.ChunkInfo;
+import com.xcq.entity.NameNode;
+import com.xcq.utils.Constant;
 
 /**
  * 管理master的文件系统

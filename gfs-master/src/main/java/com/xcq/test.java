@@ -2,8 +2,8 @@ package com.xcq;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import remote.IChunkServerRpc;
-import remote.Response;
+import com.xcq.remote.IChunkServerRpc;
+import com.xcq.remote.Response;
 
 public class test {
     public static void main(String[] args) {

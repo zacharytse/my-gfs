@@ -10,25 +10,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import dto.Chunk;
-import dto.ChunkInfo;
-import remote.IChunkServerRpc;
-import remote.IMasterRpc;
-import remote.IRpc;
-import remote.Request;
-import remote.Response;
-import remote.impl.RmiRpcImpl;
-import utils.Constant;
+import com.xcq.annotation.Config;
+import com.xcq.dto.Chunk;
+import com.xcq.dto.ChunkInfo;
+import com.xcq.dto.ServerInfo;
+import com.xcq.remote.IChunkServerRpc;
+import com.xcq.remote.IMasterRpc;
+import com.xcq.remote.IRpc;
+import com.xcq.remote.Request;
+import com.xcq.remote.Response;
+import com.xcq.remote.impl.RmiRpcImpl;
+import com.xcq.utils.Constant;
+import com.xcq.utils.FileOperation;
+import com.xcq.utils.SingletonBase;
 
-public class App {
+@Config(path = "/root/workspace/my-gfs/gfs-client/src/main/res/client.properties")
+public class App extends SingletonBase {
+
+    private String server;
+    private int serverPort;
+
+    public App() {
+        super(App.class);
+        server = getConfig("server.ip");
+        serverPort = Integer.valueOf(getConfig("server.port"));
+    }
+
     public static void main(String[] args) {
-        App app = new App();
-        app.upload("/root/test", "test");
-        //app.download("test", "/root/abc");
+        try {
+            App app = (App) SingletonBase.getInstance(App.class);
+            app.upload("/root/test", "test");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // app.download("test", "/root/abc");
     }
 
     private void upload(String origin, String target) {
-        List<Chunk> chunks = readFile(origin);
         IRpc rpc = new RmiRpcImpl();
         // Request request = Request.builder().className("127.0.1.1:9000:" +
         // IChunkServerRpc.class.getName().toString())
@@ -43,19 +61,40 @@ public class App {
         // } else {
         // System.out.println("文件上传失败");
         // }
-        Request request = Request.builder().className("127.0.1.1:1099:" +
-                IMasterRpc.class.getName().toString())
+        Request request = Request.builder().targetServer(server).targetPort(serverPort)
+                .className(IMasterRpc.class.getName())
                 .methodName("upload").build();
         request.setParams(new Object[] { request });
         Map<String, Object> body = request.getBody();
-        body.put(Constant.FILE_NAME, Constant.PREFIX + "/test");
-        ChunkInfo chunkInfo = ChunkInfo.builder().size(11l).build();
+        body.put(Constant.FILE_NAME, target);
+        ChunkInfo chunkInfo = ChunkInfo.builder().size(FileOperation.getFileSize(origin)).build();
         body.put(Constant.FILE_INFO, chunkInfo);
         Response response = rpc.send("127.0.1.1", request);
         if (response != null && response.getCode().longValue() == Constant.SUCCESS) {
-            System.out.println("文件上传成功");
+            System.out.println("文件目录上传成功");
+            System.out.println("开始上传文件");
+            body = response.getBody();
+            if (!body.containsKey(Constant.TARGET_CHUNK_SERVER)) {
+                System.out.println("缺少目标服务器信息...");
+                return;
+            }
+            ServerInfo serverInfo = (ServerInfo) body.get(Constant.TARGET_CHUNK_SERVER);
+            request.setTargetServer(serverInfo.getIp());
+            request.setTargetPort(serverInfo.getPort());
+            request.setClassName(IChunkServerRpc.class.getName());
+            request.setMethodName("upload");
+            List<Chunk> chunks = FileOperation.readFile(origin);
+            body = request.getBody();
+            body.put(Constant.CHUNK_LIST, chunks);
+            body.put(Constant.FILE_NAME, target);
+            response = rpc.send("127.0.1.1", request);
+            if (response != null && response.getCode().longValue() == Constant.SUCCESS) {
+                System.out.println("文件上传成功");
+            } else {
+                System.out.println("文件上传失败");
+            }
         } else {
-            System.out.println("文件上传失败");
+            System.out.println("文件目录上传失败");
         }
     }
 
@@ -124,7 +163,6 @@ public class App {
                     out.close();
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

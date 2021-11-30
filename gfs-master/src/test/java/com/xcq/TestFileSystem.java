@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.xcq.dto.ChunkInfo;
 import com.xcq.file.FileSystem;
+import com.xcq.utils.Constant;
 
 import org.junit.Test;
-
-import dto.ChunkInfo;
-import utils.Constant;
 
 public class TestFileSystem {
     @Test
