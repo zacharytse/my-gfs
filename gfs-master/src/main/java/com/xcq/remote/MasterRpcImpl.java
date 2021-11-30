@@ -16,6 +16,10 @@ import com.xcq.utils.SingletonBase;
 
 public class MasterRpcImpl extends UnicastRemoteObject implements IMasterRpc {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private FileSystem fileSystem;
     private Map<String, List<ChunkInfo>> chunkServer;
     private Set<String> serverList;
