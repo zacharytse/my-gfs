@@ -10,8 +10,8 @@ import java.util.List;
 
 @Service
 public class OperationServiceImpl implements IOperationService {
-    @DubboReference
-    private IMasterRpc masterRpc;
+//    @DubboReference
+//    private IMasterRpc masterRpc;
 
     @Override
     public void upload(String filename) {

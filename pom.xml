@@ -82,7 +82,12 @@
             <artifactId>curator-x-discovery</artifactId>
             <version>5.1.0</version>
         </dependency>
-
+        <!--spring热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
