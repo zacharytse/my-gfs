@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>简易客户端</title>
+</head>
+<body>
+<button>上传文件</button>
+<button>下载文件</button>
+<button>追加文件</button>
+<br>
+<span th:each="test : ${list}">
+        <a href="#" th:text="${test}"></a>
+    </span>
+<a href="#">test</a>
+<a href="#">test</a>
+<a href="#">test</a>
+<a href="#">test</a>
+<a href="#">test</a>
+<a href="#">test</a>
+
+</body>
+</html>
