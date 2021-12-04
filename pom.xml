@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -94,4 +95,69 @@
         </plugins>
     </build>
 
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+  <modelVersion>4.0.0</modelVersion>
+    
+  <groupId>com.xcq</groupId>
+    
+  <artifactId>my-gfs</artifactId>
+    
+  <version>1.0-SNAPSHOT</version>
+    
+  <packaging>pom</packaging>
+    
+  <modules>
+        
+    <module>gfs-common</module>
+        
+    <module>gfs-chunk-server</module>
+        
+    <module>gfs-master</module>
+        
+    <module>gfs-client</module>
+      
+  </modules>
+    
+  <properties>
+        
+    <maven.compiler.source>8</maven.compiler.source>
+        
+    <maven.compiler.target>8</maven.compiler.target>
+      
+  </properties>
+    
+  <dependencies>
+        
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        
+    <dependency>
+            
+      <groupId>org.projectlombok</groupId>
+            
+      <artifactId>lombok</artifactId>
+            
+      <version>1.18.22</version>
+            
+      <scope>provided</scope>
+          
+    </dependency>
+        
+    <dependency>
+            
+      <groupId>junit</groupId>
+            
+      <artifactId>junit</artifactId>
+            
+      <version>4.11</version>
+            
+      <scope>test</scope>
+          
+    </dependency>
+      
+  </dependencies>
+  
+>>>>>>> b23325ec6d7dad8a9f22d052a735dd151aad7b15
 </project>
