@@ -1,31 +1,45 @@
 package com.xcq.client.controller;
 
+import com.xcq.client.service.IFileService1;
+import com.xcq.client.service.IOperationService;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RequestMapping("/index")
+@Log4j2
 public class ClientController {
+    @Autowired
+    private IFileService1 fileService;
 
-    @GetMapping("/index")
-    public ModelAndView index() {
-        ModelAndView mv = new ModelAndView();
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
-            list.add(String.valueOf(i) + "-test");
-        }
-        mv.addObject("list", list);
-        mv.setViewName("/client.html");
-        return mv;
+    @Autowired
+    private IOperationService operationService;
+
+    @GetMapping("")
+    public String index(Model model) {
+        model.addAttribute("fileList", fileService.getFileList("test"));
+        return "index";
     }
 
-    @GetMapping("/test")
-    public ModelAndView test() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/client.html");
-        return mv;
+    @GetMapping("{filename}/download")
+    public void download(@PathVariable("filename") String filename, HttpServletResponse response) {
+        operationService.download("D:\\cotton3.txt", response);
+    }
+
+    @GetMapping("/pre")
+    public String getPreFile(Model model) {
+        return "index";
+    }
+
+    @GetMapping("/list")
+    public String getFileList(String parent, Model model) {
+        return "index";
     }
 }

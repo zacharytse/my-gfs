@@ -3,6 +3,7 @@ package com.xcq.common.dto;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class FileInfo implements Serializable {
     @Builder.Default
     private Long size = 4l;
 
+    @Builder.Default
+    private Date cretateTime = new Date();
     /**
      * 文件名称
      */

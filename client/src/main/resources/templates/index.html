@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>批量文件断点续传</title>
+    <link rel="shortcut icon" th:href="@{/img/dts.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/utils/TimeUtils.js}"></script>
+    <script type="text/javascript" th:src="@{/js/constant/urls.js}"></script>
+    <script type="text/javascript" th:src="@{/js/constant/SysConstent.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/web-uploader.min-0.1.6.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/uploader.js}"></script>
+    <script type="text/javascript" th:src="@{/js/page/index.js}"></script>
+</head>
+<body>
+<div class="main">
+    <div class="top">
+        <p class="t-title"><i>文件断点续传控制台</i></p>
+        <a class="t-right" href="javascript:;" onclick="refresh()">刷新</a>
+    </div>
+    <div class="sync-time">
+        文件同步时间：<span id="curr-date"></span>
+    </div>
+    <div class="file-list" id="fileList">
+        <ul>
+            <li class="fl-li" id="addFile"><img th:src="@{/img/add.png}"><label>添加文件</label></li>
+        </ul>
+    </div>
+    <!-- 上传进度 -->
+    <div class="upload-progress" id="uploadProgress">
+        <img id="up-spread" th:src="@{/img/up.png}" />
+        <div class="up-content">
+            <ul class="upc-data" id="upcData"></ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/utils/line-background.js}"></script>
+</body>
+</html>
